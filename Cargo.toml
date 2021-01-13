@@ -1,5 +1,3 @@
-[package]
-name = "thrusted"
-version = "0.1.0"
-authors = ["Oktay Dinler <oktay@oktaydinler.xyz>"]
-edition = "2018"
+[workspace]
+
+members = [ "aoc-*" ]
