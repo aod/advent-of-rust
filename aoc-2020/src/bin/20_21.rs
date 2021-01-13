@@ -152,13 +152,10 @@ mod solution {
 
     pub fn solve_part1(input: &str) -> usize {
         let foods: Foods = input.into();
+        let non_al_ingrs = foods.non_allergenic_ingredients();
 
         foods.0.iter().fold(0, |count, food| {
-            count
-                + foods
-                    .non_allergenic_ingredients()
-                    .intersection(&food.ingredients)
-                    .count()
+            count + non_al_ingrs.intersection(&food.ingredients).count()
         })
     }
 
