@@ -92,7 +92,7 @@ mod domain {
             sorted_occurs
         }
 
-        pub fn allergenic_ingredients(&self) -> HashMap<Allergen<'_>, Ingredient<'_>> {
+        pub fn allergenic_ingredients(&self) -> HashMap<Allergen, Ingredient> {
             let mut occurs = self.aler_ingrs_occurrences();
             let mut result: HashMap<Allergen, Ingredient> = Default::default();
             while !occurs.is_empty() {
@@ -123,7 +123,7 @@ mod domain {
             result
         }
 
-        fn all_ingredients(&self) -> HashSet<Ingredient<'_>> {
+        fn all_ingredients(&self) -> HashSet<Ingredient> {
             self.0
                 .iter()
                 .fold(Default::default(), |mut ingredients, food| {
@@ -132,7 +132,7 @@ mod domain {
                 })
         }
 
-        pub fn non_allergenic_ingredients(&self) -> HashSet<Ingredient<'_>> {
+        pub fn non_allergenic_ingredients(&self) -> HashSet<Ingredient> {
             let al_ingrs = self
                 .allergenic_ingredients()
                 .into_iter()
