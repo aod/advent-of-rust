@@ -1,6 +1,6 @@
 use solution::{solve_part1, solve_part2};
 
-const INPUT: &str = include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/inputs/day21.txt"));
+const INPUT: &str = include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/inputs/21.txt"));
 
 fn main() {
     println!(
