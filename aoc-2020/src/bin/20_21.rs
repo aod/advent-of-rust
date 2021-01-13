@@ -56,14 +56,15 @@ mod domain {
     }
 
     impl Foods<'_> {
-        pub fn allergenic_ingredients(&self) -> HashMap<Allergen<'_>, Ingredient<'_>> {
-            // Calculate how many times an ingredient is included in a food with
-            // the specified allergen.
-            let mut lookup: HashMap<Allergen, HashMap<Ingredient, usize>> = Default::default();
+        /// Calculates how many times an ingredient is included in a food with
+        /// the specified allergen. Values in the HashMap are sorted in DESC
+        /// order by their occurrences.
+        fn aler_ingrs_occurrences(&self) -> HashMap<Allergen, Vec<(Ingredient, usize)>> {
+            let mut occurs: HashMap<Allergen, HashMap<Ingredient, usize>> = Default::default();
             for food in &self.0 {
                 for al in &food.allergens {
                     for igr in &food.ingredients {
-                        lookup
+                        occurs
                             .entry(*al)
                             .or_insert(Default::default())
                             .entry(*igr)
@@ -73,43 +74,50 @@ mod domain {
                 }
             }
 
-            let mut lookup = {
-                let mut result: HashMap<Allergen, Vec<(Ingredient, usize)>> = Default::default();
-                for (al, ingrs) in lookup {
-                    let mut ingrs: Vec<_> = ingrs.into_iter().collect();
-                    ingrs.sort_by(|a, b| b.1.cmp(&a.1));
-                    result.insert(al, ingrs);
-                }
-                result
-            };
+            let mut sorted_occurs: HashMap<Allergen, Vec<(Ingredient, usize)>> = Default::default();
+            for (al, ingrs) in occurs {
+                let mut ingrs: Vec<_> = ingrs.into_iter().collect();
+                ingrs.sort_by(|a, b| b.1.cmp(&a.1));
 
+                let (_, highest_occurs) = ingrs[0];
+                sorted_occurs.insert(
+                    al,
+                    ingrs
+                        .into_iter()
+                        .filter(|x| x.1 == highest_occurs)
+                        .collect(),
+                );
+            }
+
+            sorted_occurs
+        }
+
+        pub fn allergenic_ingredients(&self) -> HashMap<Allergen<'_>, Ingredient<'_>> {
+            let mut occurs = self.aler_ingrs_occurrences();
             let mut result: HashMap<Allergen, Ingredient> = Default::default();
-            while !lookup.is_empty() {
-                lookup = {
-                    let mut res = lookup.clone();
-                    for (al, ingrs) in &lookup {
-                        if match ingrs.as_slice() {
-                            [(_, _)] => true,
-                            [(_, ocur1), (_, ocur2), ..] if ocur1 > ocur2 => true,
-                            _ => false,
-                        } {
-                            let (ingredient, _) = res.get_mut(al).unwrap().remove(0);
-                            res.remove(al);
-                            result.insert(*al, ingredient);
+            while !occurs.is_empty() {
+                let mut res = occurs.clone();
+                for (al, ingrs) in &occurs {
+                    if match ingrs.as_slice() {
+                        [(_, _)] => true,
+                        [(_, ocur1), (_, ocur2), ..] if ocur1 > ocur2 => true,
+                        _ => false,
+                    } {
+                        let (ingredient, _) = res.get_mut(al).unwrap().remove(0);
+                        res.remove(al);
+                        result.insert(*al, ingredient);
 
-                            for (_, ingredients) in res.iter_mut() {
-                                if let Some(index) = ingredients
-                                    .iter()
-                                    .position(|(other, _)| *other == ingredient)
-                                {
-                                    ingredients.remove(index);
-                                }
+                        for (_, ingredients) in res.iter_mut() {
+                            if let Some(index) = ingredients
+                                .iter()
+                                .position(|(other, _)| *other == ingredient)
+                            {
+                                ingredients.remove(index);
                             }
                         }
                     }
-
-                    res
-                };
+                }
+                occurs = res
             }
 
             result
@@ -156,12 +164,11 @@ mod solution {
 
     pub fn solve_part2(input: &str) -> String {
         let foods: Foods = input.into();
-        let mut al_ingrs: Vec<_> = foods.allergenic_ingredients()
-            .into_iter()
-            .collect();
+        let mut al_ingrs: Vec<_> = foods.allergenic_ingredients().into_iter().collect();
         al_ingrs.sort_by(|(a, _), (b, _)| a.cmp(b));
 
-        al_ingrs.into_iter()
+        al_ingrs
+            .into_iter()
             .map(|(_, ingr)| ingr.0)
             .collect::<Vec<_>>()
             .join(",")
