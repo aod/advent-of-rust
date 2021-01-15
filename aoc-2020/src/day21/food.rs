@@ -16,7 +16,7 @@ impl<'a> From<&'a str> for Foods<'a> {
     fn from(input: &'a str) -> Self {
         let mut foods: Vec<Food> = Default::default();
 
-        for line in input.lines() {
+        for line in input.trim().lines() {
             let mut split = line.split(" (contains ");
             let ingredients: Ingredients =
                 split.next().unwrap().split(' ').map(Ingredient).collect();
