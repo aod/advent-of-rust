@@ -39,7 +39,7 @@ impl Part2 for Day21 {
 #[cfg(test)]
 mod tests {
     use super::Day21;
-    use crate::aoc::{Part1, Part2};
+    use aoc_lib::{Part1, Part2};
 
     const INPUT: &'static str = include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/inputs/21.txt"));
 

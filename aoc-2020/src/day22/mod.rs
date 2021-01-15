@@ -26,7 +26,7 @@ impl Part2 for Day22 {
 #[cfg(test)]
 mod tests {
     use super::Day22;
-    use crate::aoc::{Part1, Part2};
+    use aoc_lib::{Part1, Part2};
 
     const EXAMPLE_INPUT: &'static str = "\
         Player 1:\n\
