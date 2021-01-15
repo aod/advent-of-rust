@@ -1,10 +1,12 @@
 mod aoc;
 mod day21;
+mod day22;
 
 use std::{env, fmt::Display, fs, process};
 
 use aoc::{Part1, Part2, Solution};
 use day21::Day21;
+use day22::Day22;
 
 fn main() {
     let mut args = env::args().skip(1);
@@ -28,6 +30,7 @@ fn main() {
 
             match solver.as_str() {
                 "21" => solve_print(Box::new(Day21::default()), &input),
+                "22" => solve_print(Box::new(Day22::default()), &input),
                 _ => {
                     eprintln!("Invalid solver `{}`", solver);
                     process::exit(1);
