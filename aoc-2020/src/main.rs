@@ -2,7 +2,7 @@ mod aoc;
 mod day21;
 mod day22;
 
-use std::{env, fmt::Display, fs, process};
+use std::{env, fmt::Display, fs, process, time::Instant};
 
 use aoc::{Part1, Part2, Solution};
 use day21::Day21;
@@ -49,12 +49,17 @@ where
     T: Display,
     U: Display,
 {
-    println!(
-        "Part 1:\n\
-         {}\n\
-         Part 2:\n\
-         {}",
-        Part1::solve(&*sol, input),
-        Part2::solve(&*sol, input)
-    );
+    {
+        let now = Instant::now();
+        let ans = Part1::solve(&*sol, input);
+        let elapsed = now.elapsed();
+        println!("Part1({:?}):\n{}", elapsed, ans);
+    }
+
+    {
+        let now = Instant::now();
+        let ans = Part2::solve(&*sol, input);
+        let elapsed = now.elapsed();
+        println!("Part2({:?}):\n{}", elapsed, ans);
+    }
 }
