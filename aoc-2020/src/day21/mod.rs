@@ -41,8 +41,6 @@ mod tests {
     use super::Day21;
     use aoc_lib::{Part1, Part2};
 
-    const INPUT: &'static str = include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/inputs/21.txt"));
-
     const EXAMPLE_INPUT: &'static str = "\
             mxmxvkd kfcds sqjhc nhms (contains dairy, fish)\n\
             trh fvjkl sbzzf mxmxvkd (contains dairy)\n\
@@ -55,16 +53,18 @@ mod tests {
     }
 
     #[test]
-    fn part1_answer() {
-        assert_eq!(Part1::solve(&Day21::default(), INPUT), 2211);
-    }
-
-    #[test]
     fn part2_example() {
         assert_eq!(
             Part2::solve(&Day21::default(), EXAMPLE_INPUT),
             "mxmxvkd,sqjhc,fvjkl"
         );
+    }
+
+    const INPUT: &'static str = include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/inputs/21.txt"));
+
+    #[test]
+    fn part1_answer() {
+        assert_eq!(Part1::solve(&Day21::default(), INPUT), 2211);
     }
 
     #[test]
