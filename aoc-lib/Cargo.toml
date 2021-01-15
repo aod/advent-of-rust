@@ -1,8 +1,5 @@
 [package]
-name = "aoc-2020"
+name = "aoc-lib"
 version = "0.1.0"
 authors = ["Oktay Dinler <oktay@oktaydinler.xyz>"]
 edition = "2018"
-
-[dependencies]
-aoc-lib = { path = "../aoc-lib" }

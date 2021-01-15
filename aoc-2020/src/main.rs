@@ -1,10 +1,9 @@
-mod aoc;
 mod day21;
 mod day22;
 
 use std::{env, fmt::Display, fs, process, time::Instant};
 
-use aoc::{Part1, Part2, Solution};
+use aoc_lib::{Part1, Part2, Solution};
 use day21::Day21;
 use day22::Day22;
 

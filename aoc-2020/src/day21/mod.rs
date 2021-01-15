@@ -1,6 +1,6 @@
 mod domain;
 
-use crate::aoc::{Part1, Part2};
+use aoc_lib::{Part1, Part2};
 
 use self::domain::Foods;
 
