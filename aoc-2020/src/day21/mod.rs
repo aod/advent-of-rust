@@ -43,7 +43,7 @@ mod tests {
     use super::Day21;
     use crate::aoc::{Part1, Part2};
 
-    const INPUT: &str = include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/inputs/21.txt"));
+    const INPUT: &'static str = include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/inputs/21.txt"));
 
     const EXAMPLE_INPUT: &'static str = "\
             mxmxvkd kfcds sqjhc nhms (contains dairy, fish)\n\
