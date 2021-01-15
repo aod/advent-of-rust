@@ -1,10 +1,8 @@
-mod allergen;
-mod food;
-mod ingredient;
+mod domain;
 
 use crate::aoc::{Part1, Part2};
 
-use self::food::Foods;
+use self::domain::Foods;
 
 #[derive(Default)]
 pub(crate) struct Day21;

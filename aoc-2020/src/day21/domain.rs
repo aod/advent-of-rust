@@ -1,9 +1,12 @@
 use std::collections::{HashMap, HashSet};
 
-use super::{
-    allergen::{Allergen, Allergens},
-    ingredient::{Ingredient, Ingredients},
-};
+#[derive(Debug, Default, PartialEq, Eq, Hash, Clone, Copy, PartialOrd, Ord)]
+pub(super) struct Ingredient<'a>(pub &'a str);
+pub(super) type Ingredients<'a> = HashSet<Ingredient<'a>>;
+
+#[derive(Debug, Default, PartialEq, Eq, Hash, Clone, Copy, PartialOrd, Ord)]
+pub(super) struct Allergen<'a>(pub &'a str);
+pub(super) type Allergens<'a> = HashSet<Allergen<'a>>;
 
 #[derive(Default)]
 pub(super) struct Food<'a> {
