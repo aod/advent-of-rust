@@ -1,9 +1,9 @@
 mod day21;
 mod day22;
 
-use std::{env, fmt::Display, fs, process, time::Instant};
+use std::{env, fs, process};
 
-use aoc_lib::{Part1, Part2, Solution};
+use aoc_lib::solve_print;
 use day21::Day21;
 use day22::Day22;
 
@@ -40,25 +40,5 @@ fn main() {
             eprintln!("No solver was provided");
             process::exit(1);
         }
-    }
-}
-
-fn solve_print<T, U>(sol: Box<dyn Solution<A = T, B = U>>, input: &str)
-where
-    T: Display,
-    U: Display,
-{
-    {
-        let now = Instant::now();
-        let ans = Part1::solve(&*sol, input);
-        let elapsed = now.elapsed();
-        println!("Part1({:?}):\n{}", elapsed, ans);
-    }
-
-    {
-        let now = Instant::now();
-        let ans = Part2::solve(&*sol, input);
-        let elapsed = now.elapsed();
-        println!("Part2({:?}):\n{}", elapsed, ans);
     }
 }
