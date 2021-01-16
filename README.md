@@ -1,4 +1,4 @@
-# Solutions repository
+# Advent of Code in Rust
 
 This project contains solutions for Advent of Code 2020 written in Rust.
 
