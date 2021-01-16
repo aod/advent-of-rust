@@ -22,7 +22,7 @@ impl From<&str> for Game {
             .split("\n\n")
             .map(|chunk| {
                 chunk
-                    .split("\n")
+                    .split('\n')
                     .skip(1)
                     .map(|line| line.parse().unwrap())
                     .map(Card)
@@ -61,8 +61,8 @@ impl Game {
         let mut seen_games: HashSet<Game> = Default::default();
 
         loop {
-            let ref mut deck1 = game.0;
-            let ref mut deck2 = game.1;
+            let deck1 = &mut game.0;
+            let deck2 = &mut game.1;
 
             let card1 = deck1.0.pop_front().unwrap();
             let card2 = deck2.0.pop_front().unwrap();

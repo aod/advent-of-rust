@@ -52,7 +52,7 @@ impl Foods<'_> {
                 for igr in &food.ingredients {
                     occurs
                         .entry(*al)
-                        .or_insert(Default::default())
+                        .or_insert_with(Default::default)
                         .entry(*igr)
                         .and_modify(|ocur| *ocur += 1)
                         .or_insert(1);
