@@ -30,5 +30,5 @@ be multiple with variants.
 Take for example the [2019 Day 13: Care Package](https://adventofcode.com/2019/day/13) puzzle.
 In a nutshell it's about simulating an existing game called Breakout. The extra
 challenge for this codebase is to be capable of providing the option of having
-just the "solver" and whatever extra variant, for example an interactable
-version.
+just the solver logging the answer and whatever extra variant. For example an
+interactable version where the user can play the Breakout game instead.
