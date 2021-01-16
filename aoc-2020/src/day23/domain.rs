@@ -94,7 +94,7 @@ impl CrabCups {
 
         loop {
             target -= 1;
-            if target <= 0 {
+            if target == 0 {
                 target = self.length;
             }
 
