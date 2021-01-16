@@ -32,3 +32,9 @@ In a nutshell it's about simulating an existing game called Breakout. The extra
 challenge for this codebase is to be capable of providing the option of having
 just the solver logging the answer and whatever extra variant. For example an
 interactable version where the user can play the Breakout game instead.
+
+# Testing
+
+Every solved puzzle has at least tests for the example and real input. These
+tests are ran using `cargo test` which are also automatically performed on the
+CI when a commit or pull request has happened to the main branch.
