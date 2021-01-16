@@ -19,3 +19,15 @@ Part1(17.113µs):
 Part2(656.091976ms):
 32769
 ```
+
+# Solvers
+
+A solver may simply represent a solution for a day in an Advent of Code year.
+Or it may represent a solver for the animated variant, or an optimized one. The
+idea here is that there isn't necessarily a single solver for a day, there may
+be multiple with variants.
+
+Take for example the [2019 Day 13: Care Package](https://adventofcode.com/2019/day/13) puzzle.
+It's about simulating an existing game called Breakout. The extra challenge for
+this codebase is to be capable of providing the option of having just the
+"solver" and whatever extra variant, for example an interactable version.
