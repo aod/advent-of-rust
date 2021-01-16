@@ -1,5 +1,7 @@
 # Advent of Code in Rust
 
+![Rust](https://github.com/aod/thrusted/workflows/Rust/badge.svg)
+
 This project contains solutions for Advent of Code 2020 written in Rust.
 
 # Quick start
