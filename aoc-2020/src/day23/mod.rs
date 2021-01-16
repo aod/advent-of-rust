@@ -43,9 +43,8 @@ impl Part2 for Day23 {
 
 #[cfg(test)]
 mod tests {
-    use aoc_lib::{Part1, Part2};
-
     use super::Day23;
+    use aoc_lib::{Part1, Part2};
 
     const EXAMPLE_INPUT: &'static str = "389125467";
 
