@@ -99,11 +99,9 @@ impl CrabCups {
             }
 
             if p1 != target && p2 != target && p3 != target {
-                break;
+                return target;
             }
         }
-
-        target
     }
 
     pub(super) fn do_move(&mut self) {
