@@ -25,7 +25,7 @@ impl From<&str> for Cups {
 /// next cup of a cup the algorithm is: `cups[cups[cup * 2] - 1]`. See below for
 /// an attempt at explaining it in some kind of ASCII art.
 ///
-/// ```
+/// ```text
 ///        ┌───────────────── Start: Points to current cup's next cup.
 ///        │ ┌───┬───┬───┬──── Cups: The cups values
 ///        │ │ ┌─┼─┬─┼─┬─┼─┬─── Nexts: The next cup's index
