@@ -21,3 +21,11 @@ Part1(5.701µs):
 Part2(1.505404239s):
 12757828710
 ```
+
+# Tests
+
+This project contains at least tests on the example input(s) and real input for
+every solution. To execute all tests run `cargo test --release`. You can also
+run `cargo test --release example` to only run the example tests, replace
+`example` with `answer` to test on real inputs. One can also specify the solver
+by adding the `--bin <solver>` flag.
