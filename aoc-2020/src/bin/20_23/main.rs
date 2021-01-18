@@ -1,8 +1,13 @@
 mod domain;
 
-use aoc_lib::{Part1, Part2};
+use aoc_lib::{solve_print, Part1, Part2};
+use domain::{CrabCups, Cups};
 
-use self::domain::{CrabCups, Cups};
+const INPUT: &'static str = include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/inputs/23.txt"));
+
+fn main() {
+    solve_print(Box::new(Day23::default()), INPUT);
+}
 
 #[derive(Default)]
 pub(crate) struct Day23 {
@@ -43,7 +48,7 @@ impl Part2 for Day23 {
 
 #[cfg(test)]
 mod tests {
-    use super::Day23;
+    use super::{Day23, INPUT};
     use aoc_lib::{Part1, Part2};
 
     const EXAMPLE_INPUT: &'static str = "389125467";
@@ -65,8 +70,6 @@ mod tests {
     fn part2_example() {
         assert_eq!(Part2::solve(&Day23::default(), EXAMPLE_INPUT), 149245887792);
     }
-
-    const INPUT: &'static str = include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/inputs/23.txt"));
 
     #[test]
     fn part1_answer() {
