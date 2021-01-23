@@ -57,8 +57,8 @@ impl Part2 for Day20 {
 
         image
             .0
-            .iter()
-            .map(|row| row.iter().filter(|cell| **cell == X).count())
+            .into_iter()
+            .map(|row| row.into_iter().filter(|cell| *cell == X).count())
             .sum::<usize>()
             - (sea_monsters * SEA_MONSTER_X_COUNT)
     }
