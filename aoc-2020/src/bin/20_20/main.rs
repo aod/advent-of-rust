@@ -1,7 +1,11 @@
 mod domain;
 
 use aoc_lib::{solve_print, Part1, Part2};
-use domain::Tiles;
+use domain::{
+    image::{Image, SEA_MONSTER_X_COUNT},
+    orient::Orientations,
+    tile::{Tiles, X},
+};
 
 const INPUT: &'static str = include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/inputs/20.txt"));
 
@@ -16,33 +20,8 @@ impl Part1 for Day20 {
     type A = usize;
 
     fn solve(&self, input: &str) -> Self::A {
-        let tiles = Tiles::from(input);
-        tiles
-            .0
-            .iter()
-            .map(|tile| {
-                (
-                    tiles
-                        .0
-                        .iter()
-                        .filter(|other| *other != tile)
-                        .fold(0, |mut nbors, other| {
-                            nbors += tile.orientations().fold(0, |mut tile_nbors, tile| {
-                                if tile.top_border().eq(other.bottom_border())
-                                    || tile.right_border().eq(other.left_border())
-                                    || tile.bottom_border().eq(other.top_border())
-                                    || tile.left_border().eq(other.right_border())
-                                {
-                                    tile_nbors += 1
-                                }
-                                tile_nbors
-                            });
-                            nbors
-                        }),
-                    tile,
-                )
-            })
-            .filter(|(nbors, _)| *nbors == 2)
+        Tiles::from(input)
+            .corners()
             .map(|(_, tile)| tile.id)
             .product()
     }
@@ -51,15 +30,28 @@ impl Part1 for Day20 {
 impl Part2 for Day20 {
     type B = usize;
 
-    fn solve(&self, _input: &str) -> Self::B {
-        0
+    fn solve(&self, input: &str) -> Self::B {
+        let image = Image::from(Tiles::from(input));
+
+        let (image, sea_monsters) = Orientations::from(image)
+            .map(|image| (image.clone(), image.sea_monsters()))
+            .skip_while(|(_, count)| *count == 0)
+            .next()
+            .expect("Could not find any sea monster in any orientation :(");
+
+        image
+            .0
+            .iter()
+            .map(|row| row.iter().filter(|cell| **cell == X).count())
+            .sum::<usize>()
+            - (sea_monsters * SEA_MONSTER_X_COUNT)
     }
 }
 
 #[cfg(test)]
 mod tests {
     use crate::{Day20, INPUT};
-    use aoc_lib::Part1;
+    use aoc_lib::{Part1, Part2};
 
     #[test]
     fn part1_example() {
@@ -69,26 +61,20 @@ mod tests {
         );
     }
 
-    // #[test]
-    // fn part2_example() {
-    //     assert_eq!(
-    //         Part2::solve(&Day21::default(), EXAMPLE_INPUT),
-    //         "mxmxvkd,sqjhc,fvjkl"
-    //     );
-    // }
+    #[test]
+    fn part2_example() {
+        assert_eq!(Part2::solve(&Day20::default(), EXAMPLE_INPUT), 273);
+    }
 
     #[test]
     fn part1_answer() {
         assert_eq!(Part1::solve(&Day20::default(), INPUT), 19955159604613);
     }
 
-    // #[test]
-    // fn part2_answer() {
-    //     assert_eq!(
-    //         Part2::solve(&Day21::default(), INPUT),
-    //         "vv,nlxsmb,rnbhjk,bvnkk,ttxvphb,qmkz,trmzkcfg,jpvz"
-    //     );
-    // }
+    #[test]
+    fn part2_answer() {
+        assert_eq!(Part2::solve(&Day20::default(), INPUT), 1639);
+    }
 
     const EXAMPLE_INPUT: &'static str = "\
         Tile 2311:\n\
