@@ -34,7 +34,10 @@ impl Part2 for Day20 {
         let image = Image::from(Tiles::from(input));
 
         let (image, sea_monsters) = Orientations::from(image)
-            .map(|image| (image.clone(), image.sea_monsters()))
+            .map(|image| {
+                let sm = image.sea_monsters();
+                (image, sm)
+            })
             .skip_while(|(_, count)| *count == 0)
             .next()
             .expect("Could not find any sea monster in any orientation :(");
