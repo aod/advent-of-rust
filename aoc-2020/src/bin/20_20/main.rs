@@ -20,9 +20,24 @@ impl Part1 for Day20 {
     type A = usize;
 
     fn solve(&self, input: &str) -> Self::A {
-        Tiles::from(input)
-            .corners()
-            .map(|(_, tile)| tile.id)
+        let tiles = Tiles::from(input);
+
+        tiles
+            .0
+            .iter()
+            .filter(|tile| {
+                let nbors = tiles
+                    .0
+                    .iter()
+                    .filter(|other| tile != other)
+                    .flat_map(|t| t.orientations())
+                    .map(|other| tile.stitch_to(&other))
+                    .flatten()
+                    .count();
+
+                nbors == 2
+            })
+            .map(|tile| tile.id)
             .product()
     }
 }

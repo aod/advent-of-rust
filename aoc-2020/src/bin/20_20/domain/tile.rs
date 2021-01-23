@@ -3,10 +3,7 @@ use std::{
     hash::{Hash, Hasher},
 };
 
-use super::{
-    direction::{CardinalDir, OrdinalDir},
-    orient::Orientable,
-};
+use super::{direction::CardinalDir, orient::Orientable};
 
 pub(crate) const TILE_SIZE: usize = 10;
 pub(crate) const X: TileCell = TileCell(true);
@@ -162,28 +159,6 @@ pub(crate) struct Tiles(pub(crate) HashSet<Tile>);
 impl From<&str> for Tiles {
     fn from(input: &str) -> Self {
         Self(input.split("\n\n").map(Tile::from).collect())
-    }
-}
-
-impl Tiles {
-    pub(crate) fn corners(&self) -> impl Iterator<Item = (OrdinalDir, &Tile)> + '_ {
-        self.0
-            .iter()
-            .filter_map(move |tile| -> Option<(OrdinalDir, &Tile)> {
-                let nbor_dirs: Vec<CardinalDir> = self
-                    .0
-                    .iter()
-                    .filter(|other| tile != *other)
-                    .flat_map(|t| t.orientations())
-                    .map(|other| tile.stitch_to(&other))
-                    .flatten()
-                    .collect();
-
-                OrdinalDir::all()
-                    .filter(|od| *od == &nbor_dirs.as_slice())
-                    .next()
-                    .map(|od| (*od, tile))
-            })
     }
 }
 

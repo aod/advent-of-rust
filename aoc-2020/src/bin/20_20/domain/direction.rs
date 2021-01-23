@@ -14,18 +14,6 @@ pub(crate) enum OrdinalDir {
     NorthWest,
 }
 
-impl OrdinalDir {
-    pub(crate) fn all() -> impl Iterator<Item = &'static Self> {
-        [
-            Self::NorthEast,
-            Self::SouthEast,
-            Self::SouthWest,
-            Self::NorthWest,
-        ]
-        .iter()
-    }
-}
-
 impl PartialEq<&[CardinalDir]> for OrdinalDir {
     fn eq(&self, other: &&[CardinalDir]) -> bool {
         use CardinalDir::*;
