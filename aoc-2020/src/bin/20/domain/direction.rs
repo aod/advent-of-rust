@@ -13,17 +13,3 @@ pub(crate) enum OrdinalDir {
     SouthWest,
     NorthWest,
 }
-
-impl PartialEq<&[CardinalDir]> for OrdinalDir {
-    fn eq(&self, other: &&[CardinalDir]) -> bool {
-        use CardinalDir::*;
-        *self
-            == match other {
-                [East, South] | [South, East] => Self::NorthEast,
-                [West, South] | [South, West] => Self::NorthWest,
-                [West, North] | [North, West] => Self::SouthEast,
-                [East, North] | [North, East] => Self::SouthWest,
-                _ => return false,
-            }
-    }
-}
