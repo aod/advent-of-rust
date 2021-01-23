@@ -10,7 +10,7 @@ use domain::{
 const INPUT: &'static str = include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/inputs/20.txt"));
 
 fn main() {
-    solve_print(Box::new(Day20::default()), INPUT);
+    solve_print(&Day20::default(), INPUT);
 }
 
 #[derive(Default)]

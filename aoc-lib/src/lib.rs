@@ -36,21 +36,17 @@ impl<T> Solution for T where T: Part1 + Part2 {}
 /// This procedure will display the runtime duration and answer for both parts.
 /// Answers are displayed on their own newline after the part header text with
 /// the runtime timings.
-pub fn solve_print<T, U>(sol: Box<dyn Solution<A = T, B = U>>, input: &str)
-where
-    T: Display,
-    U: Display,
-{
+pub fn solve_print(sol: &impl Solution, input: &str) {
     {
         let now = Instant::now();
-        let ans = Part1::solve(&*sol, input);
+        let ans = Part1::solve(sol, input);
         let elapsed = now.elapsed();
         println!("Part1({:?}):\n{}", elapsed, ans);
     }
 
     {
         let now = Instant::now();
-        let ans = Part2::solve(&*sol, input);
+        let ans = Part2::solve(sol, input);
         let elapsed = now.elapsed();
         println!("Part2({:?}):\n{}", elapsed, ans);
     }

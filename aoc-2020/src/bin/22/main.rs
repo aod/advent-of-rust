@@ -6,7 +6,7 @@ use domain::Game;
 const INPUT: &'static str = include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/inputs/22.txt"));
 
 fn main() {
-    solve_print(Box::new(Day22::default()), INPUT);
+    solve_print(&Day22::default(), INPUT);
 }
 
 #[derive(Default)]

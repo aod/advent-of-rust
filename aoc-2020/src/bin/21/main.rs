@@ -6,7 +6,7 @@ use domain::Foods;
 const INPUT: &'static str = include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/inputs/21.txt"));
 
 fn main() {
-    solve_print(Box::new(Day21::default()), INPUT);
+    solve_print(&Day21::default(), INPUT);
 }
 
 #[derive(Default)]

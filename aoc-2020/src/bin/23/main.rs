@@ -6,7 +6,7 @@ use domain::{CrabCups, Cups};
 const INPUT: &'static str = include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/inputs/23.txt"));
 
 fn main() {
-    solve_print(Box::new(Day23::default()), INPUT);
+    solve_print(&Day23::default(), INPUT);
 }
 
 #[derive(Default)]
