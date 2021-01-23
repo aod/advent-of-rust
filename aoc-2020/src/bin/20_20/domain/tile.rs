@@ -5,7 +5,7 @@ use std::{
 
 use super::{
     direction::{CardinalDir, OrdinalDir},
-    orient::{Orientable, Orientations},
+    orient::Orientable,
 };
 
 pub(crate) const TILE_SIZE: usize = 10;
@@ -174,7 +174,7 @@ impl Tiles {
                     .0
                     .iter()
                     .filter(|other| tile != *other)
-                    .flat_map(|t| Orientations::from(*t))
+                    .flat_map(|t| t.orientations())
                     .map(|other| tile.stitch_to(&other))
                     .flatten()
                     .collect();

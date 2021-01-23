@@ -3,7 +3,7 @@ mod domain;
 use aoc_lib::{solve_print, Part1, Part2};
 use domain::{
     image::{Image, SEA_MONSTER_X_COUNT},
-    orient::Orientations,
+    orient::Orientable,
     tile::{Tiles, X},
 };
 
@@ -33,12 +33,10 @@ impl Part2 for Day20 {
     fn solve(&self, input: &str) -> Self::B {
         let image = Image::from(Tiles::from(input));
 
-        let (image, sea_monsters) = Orientations::from(image)
-            .map(|image| {
-                let sm = image.sea_monsters();
-                (image, sm)
-            })
-            .skip_while(|(_, count)| *count == 0)
+        let (sea_monsters, image) = image
+            .orientations()
+            .map(|image| (image.sea_monsters(), image))
+            .skip_while(|(sea_monsters, _)| *sea_monsters == 0)
             .next()
             .expect("Could not find any sea monster in any orientation :(");
 

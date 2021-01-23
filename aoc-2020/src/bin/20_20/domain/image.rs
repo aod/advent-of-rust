@@ -2,7 +2,7 @@ use std::collections::HashMap;
 
 use super::{
     direction::CardinalDir,
-    orient::{Orientable, Orientations},
+    orient::Orientable,
     tile::{Tile, TileCell, Tiles, O, TILE_SIZE, X},
 };
 
@@ -60,7 +60,7 @@ impl Image {
         while let Some((coord, tile)) = q.pop() {
             let mut found = vec![];
             for other in &tiles.0 {
-                for orient in Orientations::from(*other) {
+                for orient in other.orientations() {
                     if let Some(dir) = tile.stitch_to(&orient) {
                         let d = match dir {
                             CardinalDir::North => (0, 1),

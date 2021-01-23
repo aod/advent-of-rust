@@ -1,21 +1,19 @@
-pub(crate) trait Orientable {
+pub trait Orientable: Sized {
     fn flip(&mut self);
 
     fn rotate(&mut self);
+
+    fn orientations(self) -> Orientations<Self> {
+        Orientations::from(self)
+    }
 }
 
-pub(crate) struct Orientations<T>
-where
-    T: Orientable,
-{
+pub struct Orientations<T: Orientable> {
     subject: T,
     orient_count: usize,
 }
 
-impl<T> Iterator for Orientations<T>
-where
-    T: Orientable + Clone,
-{
+impl<T: Orientable + Clone> Iterator for Orientations<T> {
     type Item = T;
 
     fn next(&mut self) -> Option<Self::Item> {
@@ -35,10 +33,7 @@ where
     }
 }
 
-impl<T> From<T> for Orientations<T>
-where
-    T: Orientable,
-{
+impl<T: Orientable> From<T> for Orientations<T> {
     fn from(subject: T) -> Self {
         Self {
             subject,
