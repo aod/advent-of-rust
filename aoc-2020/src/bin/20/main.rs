@@ -1,6 +1,6 @@
 mod domain;
 
-use aoc_lib::{solve_print, Part1, Part2};
+use aoc_lib::{Part1, Part2, Solution};
 use domain::{
     image::{Image, SEA_MONSTER_X_COUNT},
     orient::Orientable,
@@ -10,7 +10,7 @@ use domain::{
 const INPUT: &'static str = include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/inputs/20.txt"));
 
 fn main() {
-    solve_print(&Day20::default(), INPUT);
+    Day20::default().solve_print(INPUT);
 }
 
 #[derive(Default)]

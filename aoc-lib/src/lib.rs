@@ -28,26 +28,26 @@ pub trait Part2 {
 }
 
 /// A solver for both parts of an Advent of Code puzzle.
-pub trait Solution: Part1 + Part2 {}
-impl<T> Solution for T where T: Part1 + Part2 {}
+pub trait Solution: Part1 + Part2 {
+    /// Runs and prints the answer for the given solution.
+    ///
+    /// This procedure will display the runtime duration and answer for both parts.
+    /// Answers are displayed on their own newline after the part header text with
+    /// the runtime timings.
+    fn solve_print(&self, input: &str) {
+        {
+            let now = Instant::now();
+            let ans = Part1::solve(self, input);
+            let elapsed = now.elapsed();
+            println!("Part1({:?}):\n{}", elapsed, ans);
+        }
 
-/// Runs and prints the answer for the given solution.
-///
-/// This procedure will display the runtime duration and answer for both parts.
-/// Answers are displayed on their own newline after the part header text with
-/// the runtime timings.
-pub fn solve_print(sol: &impl Solution, input: &str) {
-    {
-        let now = Instant::now();
-        let ans = Part1::solve(sol, input);
-        let elapsed = now.elapsed();
-        println!("Part1({:?}):\n{}", elapsed, ans);
-    }
-
-    {
-        let now = Instant::now();
-        let ans = Part2::solve(sol, input);
-        let elapsed = now.elapsed();
-        println!("Part2({:?}):\n{}", elapsed, ans);
+        {
+            let now = Instant::now();
+            let ans = Part2::solve(self, input);
+            let elapsed = now.elapsed();
+            println!("Part2({:?}):\n{}", elapsed, ans);
+        }
     }
 }
+impl<T> Solution for T where T: Part1 + Part2 {}

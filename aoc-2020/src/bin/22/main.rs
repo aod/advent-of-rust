@@ -1,12 +1,12 @@
 mod domain;
 
-use aoc_lib::{solve_print, Part1, Part2};
+use aoc_lib::{Part1, Part2, Solution};
 use domain::Game;
 
 const INPUT: &'static str = include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/inputs/22.txt"));
 
 fn main() {
-    solve_print(&Day22::default(), INPUT);
+    Day22::default().solve_print(INPUT);
 }
 
 #[derive(Default)]
