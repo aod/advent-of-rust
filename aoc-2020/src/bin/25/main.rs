@@ -16,7 +16,7 @@ impl Part1 for Day25 {
     type A = usize;
 
     fn solve(&self, input: &str) -> Self::A {
-        let mut keys = input.lines().map(|line| line.parse().unwrap());
+        let mut keys = input.lines().map(str::parse).flatten();
         encryption_key(keys.next().unwrap(), loop_size(keys.next().unwrap()))
     }
 }
@@ -27,4 +27,24 @@ impl Part2 for Day25 {
     fn solve(&self, _: &str) -> Self::B {
         "Merry Christmas!"
     }
+}
+
+#[cfg(test)]
+mod tests {
+    use crate::{Day25, INPUT};
+    use aoc_lib::Part1;
+
+    #[test]
+    fn part1_example() {
+        assert_eq!(Part1::solve(&Day25::default(), EXAMPLE_INPUT), 14897079);
+    }
+
+    #[test]
+    fn part1_answer() {
+        assert_eq!(Part1::solve(&Day25::default(), INPUT), 4441893);
+    }
+
+    const EXAMPLE_INPUT: &str = "\
+        5764801\n\
+        17807724";
 }
