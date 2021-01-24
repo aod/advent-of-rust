@@ -3,7 +3,7 @@ mod domain;
 use aoc_lib::{Part1, Part2, Solution};
 use domain::Foods;
 
-const INPUT: &'static str = include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/inputs/21.txt"));
+const INPUT: &str = include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/inputs/21.txt"));
 
 fn main() {
     Day21::default().solve_print(INPUT);

@@ -110,8 +110,8 @@ impl Image {
         let mut count = 0;
         for y in 0..self.height() - SEA_MONSTER_HEIGHT {
             'monster_check: for x in 0..self.width() - SEA_MONSTER_WIDTH {
-                for sy in 0..SEA_MONSTER_HEIGHT {
-                    let monster_row = SEA_MONSTER[sy]
+                for (sy, row) in SEA_MONSTER.iter().enumerate().take(SEA_MONSTER_HEIGHT) {
+                    let monster_row = row
                         .iter()
                         .enumerate()
                         .filter(|(_, tile_cell)| **tile_cell == X);

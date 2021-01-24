@@ -54,9 +54,9 @@ impl Orientable for Tile {
 
     fn rotate(&mut self) {
         let mut rotated: [[TileCell; TILE_SIZE]; TILE_SIZE] = Default::default();
-        for i in 0..TILE_SIZE {
-            for j in 0..TILE_SIZE {
-                rotated[i][j] = self.data[TILE_SIZE - j - 1][i];
+        for (i, row) in rotated.iter_mut().enumerate().take(TILE_SIZE) {
+            for (j, tile_cell) in row.iter_mut().enumerate().take(TILE_SIZE) {
+                *tile_cell = self.data[TILE_SIZE - j - 1][i];
             }
         }
 
@@ -115,8 +115,7 @@ impl From<&str> for Tile {
             .next()
             .unwrap()
             .split_whitespace()
-            .skip(1)
-            .next()
+            .nth(1)
             .unwrap()
             .trim_end_matches(':')
             .parse()

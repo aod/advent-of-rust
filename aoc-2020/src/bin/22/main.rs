@@ -3,7 +3,7 @@ mod domain;
 use aoc_lib::{Part1, Part2, Solution};
 use domain::Game;
 
-const INPUT: &'static str = include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/inputs/22.txt"));
+const INPUT: &str = include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/inputs/22.txt"));
 
 fn main() {
     Day22::default().solve_print(INPUT);

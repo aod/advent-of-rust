@@ -7,7 +7,7 @@ use domain::{
     tile::{Tiles, X},
 };
 
-const INPUT: &'static str = include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/inputs/20.txt"));
+const INPUT: &str = include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/inputs/20.txt"));
 
 fn main() {
     Day20::default().solve_print(INPUT);
@@ -51,8 +51,7 @@ impl Part2 for Day20 {
         let (sea_monsters, image) = image
             .orientations()
             .map(|image| (image.sea_monsters(), image))
-            .skip_while(|(sea_monsters, _)| *sea_monsters == 0)
-            .next()
+            .find(|(sea_monsters, _)| *sea_monsters != 0)
             .expect("Could not find any sea monster in any orientation :(");
 
         image
