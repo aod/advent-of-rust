@@ -25,17 +25,19 @@ Part2(9.77521ms):
 
 # Tests
 
-To run all the tests execute the following command:
+Every example and user input is tested and automatically run in CI using GitHub
+Actions. To run all tests locally execute the following command:
 
 ```
 $ cargo test --release
 ```
 
-The first non-flag argument in `test` is used to filter on the function names.
-Use `example` to run example tests and `answer` for testing on real inputs.
+The first non-flag argument in `cargo test` is used to filter on the function
+name. Use `example` or `answer` to test solutions with the example or user input
+respectively.
 
-One can use the `-p` and `--bin` flags as is used in the `cargo run` example
-above to filter down to the year and or day.
+One can further filter down to the year and or day by adding the previously
+mentioned `-p` and or `--bin` flags, as is used in the `cargo run` example above.
 
 # User benchmarks
 
