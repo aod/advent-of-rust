@@ -32,16 +32,7 @@ by adding the `--bin <solver>` flag.
 
 # User benchmarks
 
-Host info:
-
-```
-*───────────────────────────────────────────────*
-│ OS         =   Ubuntu 20.04.1 LTS             │
-│ KERNEL     =   5.8.0-40-generic               │
-│ CPU        =   Intel i5-8250U (8) @ 3.400GHz  │
-│ MEMORY     =   4.07GiB / 7.66GiB              │
-*───────────────────────────────────────────────*
-```
+Ran on Intel CPU i5-8250U (8) @ 3.400GHz.
 
 ## [Advent of Code 2020][aoc_2020]
 
