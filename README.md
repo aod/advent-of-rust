@@ -30,7 +30,7 @@ run `cargo test --release example` to only run the example tests, replace
 `example` with `answer` to test on real inputs. One can also specify the solver
 by adding the `--bin <solver>` flag.
 
-# Benchmarks
+# User benchmarks
 
 Host info:
 
@@ -39,7 +39,6 @@ Host info:
 │ OS         =   Ubuntu 20.04.1 LTS             │
 │ KERNEL     =   5.8.0-40-generic               │
 │ CPU        =   Intel i5-8250U (8) @ 3.400GHz  │
-│ PACKAGES   =   2423 (apt)                     │
 │ MEMORY     =   4.07GiB / 7.66GiB              │
 *───────────────────────────────────────────────*
 ```
