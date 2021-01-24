@@ -2,18 +2,19 @@
 
 ![Rust](https://github.com/aod/thrusted/workflows/Rust/badge.svg)
 
-This project contains solutions for [Advent of Code 2020][aoc_2020] written in [Rust][rust].
+This project (for the time being) only contains solutions for
+[Advent of Code 2020][aoc_2020].
 
 # Quick start
 
 1. Install the Rust programming language [here][rust_install].
 2. Clone the repository: `git clone https://github.com/aod/thrusted.git`
-2. Run a solution: `cargo run --release -p aoc-2020 --bin <solver>`
+2. Run a solution: `cargo run --release -p aoc-<year> --bin <day>`
 
 ## Example
 
 ```
-$ cargo run -p aoc-2020 --release --bin 20
+$ cargo run --release -p aoc-2020 --bin 20
     Finished release [optimized] target(s) in 0.01s
      Running `target/release/20`
 Part1(17.098503ms):
