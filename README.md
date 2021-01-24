@@ -24,11 +24,17 @@ Part2(9.77521ms):
 
 # Tests
 
-This project contains at least tests on the example input(s) and real input for
-every solution. To execute all tests run `cargo test --release`. You can also
-run `cargo test --release example` to only run the example tests, replace
-`example` with `answer` to test on real inputs. One can also specify the solver
-by adding the `--bin <solver>` flag.
+To run all the tests execute the following command:
+
+```
+$ cargo test --release
+```
+
+The first non-flag argument in `test` is used to filter on the function names.
+Use `example` to run example tests and `answer` for testing on real inputs.
+
+One can use the `-p` and `--bin` flags as is used in the `cargo run` example
+above to filter down to the year and or day.
 
 # User benchmarks
 
