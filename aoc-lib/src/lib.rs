@@ -1,6 +1,9 @@
 //! Advent of Code related concepts reside in this module.
 
-use std::{fmt::Display, time::Instant};
+use std::{
+    fmt::Display,
+    time::{Duration, Instant},
+};
 
 /// A solver for part 1 of an Advent of Code puzzle.
 pub trait Part1 {
@@ -34,20 +37,46 @@ pub trait Solution: Part1 + Part2 {
     /// This procedure will display the runtime duration and answer for both parts.
     /// Answers are displayed on their own newline after the part header text with
     /// the runtime timings.
-    fn solve_print(&self, input: &str) {
-        {
-            let now = Instant::now();
-            let ans = Part1::solve(self, input);
-            let elapsed = now.elapsed();
-            println!("Part1({:?}):\n{}", elapsed, ans);
-        }
-
-        {
-            let now = Instant::now();
-            let ans = Part2::solve(self, input);
-            let elapsed = now.elapsed();
-            println!("Part2({:?}):\n{}", elapsed, ans);
-        }
+    fn solve_print(&self, input: &str)
+    where
+        Self: Sized,
+    {
+        (self as &dyn Part1<A = Self::A>).solve_print(input, "Part1");
+        (self as &dyn Part2<B = Self::B>).solve_print(input, "Part2");
     }
 }
-impl<T> Solution for T where T: Part1 + Part2 {}
+impl<T: Part1 + Part2> Solution for T {}
+
+pub trait Solver {
+    type Answer: Display;
+
+    fn solve(&self, input: &str) -> Self::Answer;
+
+    fn solve_print(&self, input: &str, header: &str) {
+        let (ans, elapsed) = self.time(input);
+        println!("{}({:?})\n{}", header, elapsed, ans)
+    }
+
+    fn time(&self, input: &str) -> (Self::Answer, Duration) {
+        let now = Instant::now();
+        let ans = self.solve(input);
+        let elapsed = now.elapsed();
+        (ans, elapsed)
+    }
+}
+
+impl<T: Display> Solver for &dyn Part1<A = T> {
+    type Answer = T;
+
+    fn solve(&self, input: &str) -> Self::Answer {
+        Part1::solve(*self, input)
+    }
+}
+
+impl<T: Display> Solver for &dyn Part2<B = T> {
+    type Answer = T;
+
+    fn solve(&self, input: &str) -> Self::Answer {
+        Part2::solve(*self, input)
+    }
+}
