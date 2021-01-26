@@ -3,7 +3,7 @@ mod domain;
 use aoc_lib::{Part1, Part2, Solution};
 use domain::{BlackTiles, Tiles};
 
-const INPUT: &'static str = include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/inputs/24.txt"));
+const INPUT: &str = include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/inputs/24.txt"));
 
 fn main() {
     Day24::default().solve_print(INPUT);

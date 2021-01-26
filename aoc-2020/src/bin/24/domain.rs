@@ -150,7 +150,19 @@ impl Iterator for BlackTiles {
             let nbors = self.black_nbors(&candidate);
             let is_black_tile = self.0.contains(&candidate);
 
-            if (is_black_tile && (nbors == 1 || nbors == 2)) || (!is_black_tile && nbors == 2) {
+            /*
+             * Tiles are/stay flipped according to the following rules:
+             *
+             * - Any black tile with zero or more than 2 black tiles immediately
+             *   adjacent to it is flipped to white.
+             * - Any white tile with exactly 2 black tiles immediately adjacent to
+             *   it is flipped to black.
+             */
+            let should_b_tile_stay_flipped = is_black_tile && nbors == 1;
+            // NOTE: This also covers the black tile `nbors == 2` rule.
+            let can_w_tile_flip = nbors == 2;
+
+            if can_w_tile_flip || should_b_tile_stay_flipped {
                 next.0.insert(candidate);
             }
         }
