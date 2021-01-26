@@ -55,6 +55,11 @@ Ran on Intel CPU i5-8250U (8) @ 3.400GHz.
 | [20][aoc_2020_20]  |  16.124 ms |   5.726 ms |  21.850 ms |
 | Total              |  56.450 ms |   2.913  s |   2.968  s |
 
+---
+
+<!-- find . -name "*.rs" -exec grep -Hn ".unwrap()" {} 2>/dev/null \; | wc -l -->
+`.unwrap()` counter: **20**
+
 [rust]: https://www.rust-lang.org
 [rust_install]: https://www.rust-lang.org/tools/install
 [aoc]: https://adventofcode.com
