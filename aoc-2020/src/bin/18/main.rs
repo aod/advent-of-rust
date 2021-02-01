@@ -1,7 +1,7 @@
 mod domain;
 
 use aoc_lib::{Part1, Part2, Solution};
-use domain::dumb_eval;
+use domain::eval;
 
 const INPUT: &str = include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/inputs/18.txt"));
 
@@ -16,7 +16,7 @@ impl Part1 for Day18 {
     type A = u64;
 
     fn solve(&self, input: &str) -> Self::A {
-        input.lines().map(dumb_eval).sum()
+        input.lines().map(eval).sum()
     }
 }
 
