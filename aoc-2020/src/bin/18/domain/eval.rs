@@ -1,64 +1,39 @@
-use std::iter::Peekable;
-
-use super::tokenizer::{tokenize, Token};
+use super::{
+    syntax::{Equation, Operator},
+    tokenizer::{tokenize, Token},
+};
 
 pub fn eval(s: &str) -> u64 {
-    let tokens = tokenize(s);
+    let tokens = tokenize(s)
+        .into_iter()
+        .map(|token| match token {
+            Token::LParen => Token::RParen,
+            Token::RParen => Token::LParen,
+            _ => token,
+        })
+        .rev()
+        .collect::<Vec<_>>();
 
-    eval_helper(
-        &mut tokens
-            .into_iter()
-            .map(|t| match t {
-                Token::LParen => Token::RParen,
-                Token::RParen => Token::LParen,
-                _ => t,
-            })
-            .rev()
-            .peekable(),
-    )
+    // println!("{:?}", tokens);
+    let equation = Equation::from(tokens);
+
+    // println!("{:?}", &equation);
+    eval_helper(&equation)
 }
 
-fn eval_helper(tokens: &mut Peekable<impl Iterator<Item = Token>>) -> u64 {
-    let token = match tokens.next() {
-        Some(token) => token,
-        None => return 0,
-    };
+fn eval_helper(eq: &Equation) -> u64 {
+    match eq {
+        Equation::Number(val) => *val,
+        Equation::Expr(lhs, op, rhs) => {
+            let lhs = eval_helper(&lhs);
+            let rhs = eval_helper(&rhs);
 
-    match token {
-        Token::Number(val) => {
-            if tokens.peek().is_none() {
-                return val;
-            }
-
-            let op = tokens.next().unwrap();
-            if Token::RParen == op {
-                return val;
-            }
-
-            let rhs = eval_helper(tokens);
             match op {
-                Token::Add => return val + rhs,
-                Token::Mul => return val * rhs,
-                _ => unreachable!(),
+                Operator::Add => lhs + rhs,
+                Operator::Multiply => lhs * rhs,
             }
         }
-
-        Token::LParen => {
-            let lhs = eval_helper(tokens);
-            if let Some(op) = tokens.next() {
-                match op {
-                    Token::Add => return lhs + eval_helper(tokens),
-                    Token::Mul => return lhs * eval_helper(tokens),
-                    Token::LParen => eval_helper(tokens),
-                    Token::RParen => return lhs,
-                    _ => unreachable!(),
-                }
-            } else {
-                return lhs;
-            }
-        }
-
-        token => panic!("unexpected token: {:?}", token),
+        Equation::Group(x) => eval_helper(x),
     }
 }
 

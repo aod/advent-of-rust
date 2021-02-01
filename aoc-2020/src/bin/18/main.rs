@@ -21,7 +21,7 @@ impl Part1 for Day18 {
 }
 
 impl Part2 for Day18 {
-    type B = u32;
+    type B = u64;
 
     fn solve(&self, _input: &str) -> Self::B {
         0
