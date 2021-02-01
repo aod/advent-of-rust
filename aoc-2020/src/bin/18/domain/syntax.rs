@@ -45,11 +45,7 @@ fn build_equation_helper(tokens: &mut Peekable<impl Iterator<Item = Token>>) -> 
                     _ => unreachable!(),
                 };
 
-                return Equation::new_expr(
-                    Equation::Number(lhs),
-                    op,
-                    build_equation_helper(tokens),
-                );
+                Equation::new_expr(Equation::Number(lhs), op, build_equation_helper(tokens))
             }
             Token::LParen => {
                 let lhs = Equation::new_group(build_equation_helper(tokens));
@@ -63,7 +59,7 @@ fn build_equation_helper(tokens: &mut Peekable<impl Iterator<Item = Token>>) -> 
                     _ => unreachable!(),
                 };
 
-                return Equation::new_expr(lhs, op, build_equation_helper(tokens));
+                Equation::new_expr(lhs, op, build_equation_helper(tokens))
             }
             _ => unreachable!(),
         },

@@ -9,9 +9,9 @@ pub(super) enum Token {
 
 pub(super) fn tokenize(s: &str) -> Vec<Token> {
     let mut parsed = vec![];
-    let mut tokens = s.chars().filter(|c| !c.is_whitespace());
+    let tokens = s.chars().filter(|c| !c.is_whitespace());
 
-    while let Some(token) = tokens.next() {
+    for token in tokens {
         let token = match token {
             '+' => Token::Plus,
             '*' => Token::Minus,
