@@ -8,19 +8,14 @@ pub(super) enum Token {
 }
 
 pub(super) fn tokenize(s: &str) -> Vec<Token> {
-    let mut parsed = vec![];
-    let tokens = s.chars().filter(|c| !c.is_whitespace());
-
-    for token in tokens {
-        let token = match token {
+    s.chars()
+        .filter(|c| !c.is_whitespace())
+        .map(|c| match c {
             '+' => Token::Plus,
             '*' => Token::Minus,
             '(' => Token::LParen,
             ')' => Token::RParen,
             n => Token::Number(n.to_digit(10).unwrap() as u64),
-        };
-        parsed.push(token);
-    }
-
-    parsed
+        })
+        .collect()
 }
