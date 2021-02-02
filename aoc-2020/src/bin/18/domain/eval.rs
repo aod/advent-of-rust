@@ -20,16 +20,6 @@ pub fn eval(s: &str) -> u64 {
     eval_helper(&equation)
 }
 
-pub fn eval2(s: &str) -> u64 {
-    let mut equation = Equation::from(tokenize(s));
-    eval_adds(&mut equation);
-
-    match equation {
-        Equation::Number(result) => result,
-        _ => unreachable!(),
-    }
-}
-
 fn eval_helper(eq: &Equation) -> u64 {
     match eq {
         Equation::Number(val) => *val,
@@ -46,21 +36,31 @@ fn eval_helper(eq: &Equation) -> u64 {
     }
 }
 
-fn eval_adds(eq: &mut Equation) {
+pub fn eval2(s: &str) -> u64 {
+    let mut equation = Equation::from(tokenize(s));
+    eval2_helper(&mut equation);
+
+    match equation {
+        Equation::Number(result) => result,
+        _ => unreachable!(),
+    }
+}
+
+fn eval2_helper(eq: &mut Equation) {
     use Equation::*;
     use Operator::*;
     match eq {
         Expr(lhs, op, rhs) => {
             if let Equation::Group(_) = &**lhs {
-                eval_adds(lhs);
+                eval2_helper(lhs);
             }
             if let Equation::Group(_) = &**rhs {
-                eval_adds(rhs);
+                eval2_helper(rhs);
             }
 
             if *op == Multiply {
-                eval_adds(lhs);
-                eval_adds(rhs);
+                eval2_helper(lhs);
+                eval2_helper(rhs);
             }
 
             // NOTE: Hidden logic here...
@@ -80,11 +80,11 @@ fn eval_adds(eq: &mut Equation) {
                 (Number(left), Expr(mid, op2, right)) => match &mut **mid {
                     Number(midval) => {
                         *eq = Equation::new_expr(Number(*left + *midval), *op2, *right.clone());
-                        eval_adds(eq);
+                        eval2_helper(eq);
                     }
                     Group(_) => {
-                        eval_adds(mid);
-                        eval_adds(eq);
+                        eval2_helper(mid);
+                        eval2_helper(eq);
                     }
                     _ => unreachable!(),
                 },
@@ -92,7 +92,7 @@ fn eval_adds(eq: &mut Equation) {
             }
         }
         Group(inner) => {
-            eval_adds(inner);
+            eval2_helper(inner);
             *eq = *inner.clone();
         }
         Number(_) => {}
