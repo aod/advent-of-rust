@@ -53,12 +53,14 @@ Ran on Intel CPU i5-8250U (8) @ 3.400GHz.
 | [22][aoc_2020_22]  |  15.182 µs | 848.102 ms | 848.117 ms |
 | [21][aoc_2020_21]  |   1.302 ms | 947.059 µs |   2.249 ms |
 | [20][aoc_2020_20]  |  16.124 ms |   5.726 ms |  21.850 ms |
-| Total              |  56.450 ms |   2.913  s |   2.968  s |
+| [19][aoc_2020_19]  |  *N.A.*    |  *N.A.*    |  *N.A.*    |
+| [18][aoc_2020_18]  | 877.271 µs |   1.752 ms |   2.629 ms |
+| Total              |  57.327 ms |   2.915  s |   2.971  s |
 
 ---
 
 <!-- find . -name "*.rs" -exec grep -Hn ".unwrap()" {} 2>/dev/null \; | wc -l -->
-`.unwrap()` counter: **20**
+`.unwrap()` counter: **24**
 
 [rust]: https://www.rust-lang.org
 [rust_install]: https://www.rust-lang.org/tools/install
@@ -70,3 +72,5 @@ Ran on Intel CPU i5-8250U (8) @ 3.400GHz.
 [aoc_2020_22]: https://adventofcode.com/2020/day/22
 [aoc_2020_21]: https://adventofcode.com/2020/day/21
 [aoc_2020_20]: https://adventofcode.com/2020/day/20
+[aoc_2020_19]: https://adventofcode.com/2020/day/19
+[aoc_2020_18]: https://adventofcode.com/2020/day/18
