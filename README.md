@@ -60,7 +60,7 @@ Ran on Intel CPU i5-8250U (8) @ 3.400GHz.
 ---
 
 <!-- find . -name "*.rs" -exec grep -Hn ".unwrap()" {} 2>/dev/null \; | wc -l -->
-`.unwrap()` counter: **20**
+`.unwrap()` counter: **24**
 
 [rust]: https://www.rust-lang.org
 [rust_install]: https://www.rust-lang.org/tools/install
