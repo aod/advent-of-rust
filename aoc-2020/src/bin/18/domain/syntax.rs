@@ -1,22 +1,41 @@
-use std::iter::Peekable;
+use std::{fmt::Display, iter::Peekable};
 
 use super::tokenizer::Token;
 
-#[derive(Debug)]
+#[derive(Debug, Clone, Copy, PartialEq)]
 pub(super) enum Operator {
     Add,
     Multiply,
 }
 
-#[derive(Debug)]
+impl Display for Operator {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Add => write!(f, "+"),
+            Self::Multiply => write!(f, "*"),
+        }
+    }
+}
+
+#[derive(Debug, Clone, PartialEq)]
 pub(super) enum Equation {
     Number(u64),
     Expr(Box<Equation>, Operator, Box<Equation>),
     Group(Box<Equation>),
 }
 
+impl Display for Equation {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Equation::Number(num) => write!(f, "{}", num),
+            Equation::Expr(lhs, op, rhs) => write!(f, "{} {} {}", lhs, op, rhs),
+            Equation::Group(group) => write!(f, "({})", group),
+        }
+    }
+}
+
 impl Equation {
-    fn new_expr(lhs: Self, op: Operator, rhs: Self) -> Self {
+    pub(super) fn new_expr(lhs: Self, op: Operator, rhs: Self) -> Self {
         Self::Expr(Box::new(lhs), op, Box::new(rhs))
     }
 

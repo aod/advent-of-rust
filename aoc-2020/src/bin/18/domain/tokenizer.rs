@@ -8,14 +8,32 @@ pub(super) enum Token {
 }
 
 pub(super) fn tokenize(s: &str) -> Vec<Token> {
-    s.chars()
-        .filter(|c| !c.is_whitespace())
-        .map(|c| match c {
+    let mut tokens = vec![];
+    let mut chars = s.chars().filter(|c| !c.is_whitespace()).peekable();
+
+    while let Some(char) = chars.next() {
+        let token = match char {
             '+' => Token::Plus,
             '*' => Token::Minus,
             '(' => Token::LParen,
             ')' => Token::RParen,
-            n => Token::Number(n.to_digit(10).unwrap() as u64),
-        })
-        .collect()
+            n if n.is_digit(10) => {
+                let mut s = n.to_digit(10).unwrap() as u64;
+                loop {
+                    match chars.peek() {
+                        Some(n) if n.is_digit(10) => {
+                            s *= 10;
+                            s += chars.next().unwrap().to_digit(10).unwrap() as u64;
+                        }
+                        _ => break,
+                    }
+                }
+                Token::Number(s)
+            }
+            _ => panic!("invalid token {}", char),
+        };
+        tokens.push(token);
+    }
+
+    tokens
 }
