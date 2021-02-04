@@ -55,7 +55,8 @@ Ran on Intel CPU i5-8250U (8) @ 3.400GHz.
 | [20][aoc_2020_20]  |  16.124 ms |   5.726 ms |  21.850 ms |
 | [19][aoc_2020_19]  |  *N.A.*    |  *N.A.*    |  *N.A.*    |
 | [18][aoc_2020_18]  | 877.271 µs |   1.752 ms |   2.629 ms |
-| Total              |  57.327 ms |   2.915  s |   2.971  s |
+| [17][aoc_2020_17]  |  29.106 ms |   1.490  s |   1.519  s |
+| Total              |  86.433 ms |   4.405  s |   4.490  s |
 
 ---
 
@@ -74,3 +75,4 @@ Ran on Intel CPU i5-8250U (8) @ 3.400GHz.
 [aoc_2020_20]: https://adventofcode.com/2020/day/20
 [aoc_2020_19]: https://adventofcode.com/2020/day/19
 [aoc_2020_18]: https://adventofcode.com/2020/day/18
+[aoc_2020_17]: https://adventofcode.com/2020/day/17
