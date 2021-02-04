@@ -1,12 +1,19 @@
-use std::collections::HashSet;
+use std::{collections::HashSet, hash::Hash};
 
-pub type Cube = super::point::Point3;
+use super::{point3::Point3, point4::Point4};
+
+pub type Cube = Point3;
+pub type HyperCube = Point4;
+
+pub trait SomeCube: Sized + PartialEq + Eq + Hash + Copy {
+    fn nbors(&self) -> Vec<Self>;
+}
 
 /// Pocket consists of **active** cubes.
 #[derive(Debug, Default)]
-pub struct Pocket(HashSet<Cube>);
+pub struct Pocket<T: SomeCube>(HashSet<T>);
 
-impl From<&str> for Pocket {
+impl From<&str> for Pocket<Cube> {
     fn from(input: &str) -> Self {
         Self(
             input
@@ -23,21 +30,45 @@ impl From<&str> for Pocket {
     }
 }
 
-impl Pocket {
+impl From<&str> for Pocket<HyperCube> {
+    fn from(input: &str) -> Self {
+        Self(
+            input
+                .lines()
+                .enumerate()
+                .flat_map(|(x, line)| {
+                    line.chars()
+                        .enumerate()
+                        .filter(|(_, state)| state == &'#')
+                        .map(move |(y, _)| HyperCube::new(x as isize, y as isize, 0, 0))
+                })
+                .collect(),
+        )
+    }
+}
+
+impl<T: SomeCube> Pocket<T> {
+    fn new() -> Self {
+        Self(Default::default())
+    }
+
     pub fn size(&self) -> usize {
         self.0.len()
     }
 
-    fn active_nbors(&self, cube: Cube) -> usize {
-        cube.nbors().filter(|nbor| self.0.contains(&nbor)).count()
+    fn active_nbors(&self, cube: T) -> usize {
+        cube.nbors()
+            .iter()
+            .filter(|nbor| self.0.contains(&nbor))
+            .count()
     }
 
     pub fn next(&mut self) {
-        let mut next: Self = Default::default();
+        let mut next: Self = Self::new();
         let candidates = self
             .0
             .iter()
-            .flat_map(Cube::nbors)
+            .flat_map(T::nbors)
             .chain(self.0.iter().copied());
 
         for candidate in candidates {
@@ -80,7 +111,7 @@ mod tests {
             .#.\n\
             ..#\n\
             ###";
-        let pocket = Pocket::from(input);
+        let pocket = Pocket::<Cube>::from(input);
 
         assert_eq!(
             pocket.0,

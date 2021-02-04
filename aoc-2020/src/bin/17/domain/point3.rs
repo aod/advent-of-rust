@@ -1,5 +1,7 @@
 use std::ops::Add;
 
+use super::pocket::SomeCube;
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub struct Point3(isize, isize, isize);
 
@@ -30,8 +32,10 @@ impl Point3 {
             .map(|(x, y, z)| Self::new(x, y, z))
             .filter(|point| point != &Point3::new(0, 0, 0))
     }
+}
 
-    pub fn nbors(&self) -> impl Iterator<Item = Self> + '_ {
-        Self::diffs().map(move |diff| self + &diff)
+impl SomeCube for Point3 {
+    fn nbors(&self) -> Vec<Self> {
+        Self::diffs().map(move |diff| self + &diff).collect()
     }
 }

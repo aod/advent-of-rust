@@ -1,7 +1,7 @@
 mod domain;
 
 use aoc_lib::{Part1, Part2, Solution};
-use domain::pocket::Pocket;
+use domain::pocket::{Cube, HyperCube, Pocket};
 
 const INPUT: &str = include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/inputs/17.txt"));
 
@@ -17,7 +17,7 @@ impl Part1 for Day17 {
 
     fn solve(&self, input: &str) -> Self::A {
         (0..6)
-            .fold(Pocket::from(input), |mut pocket, _| {
+            .fold(Pocket::<Cube>::from(input), |mut pocket, _| {
                 pocket.next();
                 pocket
             })
@@ -28,8 +28,13 @@ impl Part1 for Day17 {
 impl Part2 for Day17 {
     type B = usize;
 
-    fn solve(&self, _input: &str) -> Self::B {
-        0
+    fn solve(&self, input: &str) -> Self::B {
+        (0..6)
+            .fold(Pocket::<HyperCube>::from(input), |mut pocket, _| {
+                pocket.next();
+                pocket
+            })
+            .size()
     }
 }
 
@@ -51,9 +56,8 @@ mod tests {
     }
 
     #[test]
-    #[ignore]
     fn part2_example() {
-        // ...
+        assert_eq!(Part2::solve(&Day::default(), EXAMPLE_INPUT), 848);
     }
 
     #[test]
@@ -62,8 +66,7 @@ mod tests {
     }
 
     #[test]
-    #[ignore]
     fn part2_answer() {
-        assert_eq!(Part2::solve(&Day::default(), INPUT), Default::default());
+        assert_eq!(Part2::solve(&Day::default(), INPUT), 1600);
     }
 }
