@@ -5,14 +5,6 @@ use super::pocket::SomeCube;
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub struct Point3(isize, isize, isize);
 
-impl Add for Point3 {
-    type Output = Self;
-
-    fn add(self, rhs: Self) -> Self::Output {
-        &self + &rhs
-    }
-}
-
 impl Add for &Point3 {
     type Output = Point3;
 
