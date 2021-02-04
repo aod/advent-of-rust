@@ -87,12 +87,7 @@ impl<T: SomeCube> Pocket<T> {
              *   inactive.
             */
 
-            // active rule:
-            if is_active_cube && (nbors == 3 || nbors == 2) {
-                next.0.insert(candidate);
-            }
-            // inactive rule:
-            if !is_active_cube && nbors == 3 {
+            if nbors == 3 || is_active_cube && nbors == 2 {
                 next.0.insert(candidate);
             }
         }
