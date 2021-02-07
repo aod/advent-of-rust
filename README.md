@@ -2,8 +2,7 @@
 
 ![Rust](https://github.com/aod/thrusted/workflows/Rust/badge.svg)
 
-This project (for the time being) only contains solutions for
-[Advent of Code 2020][aoc_2020].
+This project contains solutions for [Advent of Code][aoc] puzzles.
 
 # Quick start
 
@@ -39,7 +38,10 @@ respectively.
 One can further filter down to the year and or day by adding the previously
 mentioned `-p` and or `--bin` flags, as is used in the `cargo run` example above.
 
+
 # User benchmarks
+
+_TODO: Use a benchmarking library instead of manual user benchmarks._
 
 Ran on Intel CPU i5-8250U (8) @ 3.400GHz.
 
@@ -61,7 +63,7 @@ Ran on Intel CPU i5-8250U (8) @ 3.400GHz.
 ---
 
 <!-- find . -name "*.rs" -exec grep -Hn ".unwrap()" {} 2>/dev/null \; | wc -l -->
-`.unwrap()` counter: **24**
+`.unwrap()` counter: **53**
 
 [rust]: https://www.rust-lang.org
 [rust_install]: https://www.rust-lang.org/tools/install
