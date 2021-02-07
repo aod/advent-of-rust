@@ -7,7 +7,7 @@ This project contains solutions for [Advent of Code][aoc] puzzles.
 # Quick start
 
 1. Install the Rust programming language [here][rust_install].
-2. Clone the repository: `git clone https://github.com/aod/advent-of-unwrap.git`
+2. Clone the repository: `git clone https://github.com/aod/advent-of-rust.git`
 2. Run a solution: `cargo run --release -p aoc-<year> --bin <day>`
 
 ## Example
