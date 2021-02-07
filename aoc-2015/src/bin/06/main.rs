@@ -32,7 +32,7 @@ impl Part2 for Day06 {
     fn solve(&self, input: &str) -> Self::B {
         Instructions::from(input).sum(|phrase, brightness: &mut usize| match phrase {
             Phrase::TurnOn => *brightness += 1,
-            Phrase::TurnOff => *brightness = brightness.checked_sub(1).unwrap_or_else(|| 0),
+            Phrase::TurnOff => *brightness = brightness.checked_sub(1).unwrap_or(0),
             Phrase::Toggle => *brightness += 2,
         })
     }

@@ -56,7 +56,7 @@ impl From<&str> for Instructions {
 }
 
 impl Instructions {
-    pub fn sum<'i, Result, Cell, Callback>(self, f: Callback) -> Result
+    pub fn sum<Result, Cell, Callback>(self, f: Callback) -> Result
     where
         Result: Sum<Result> + From<Cell>,
         Cell: Default + Copy,
